@@ -35,11 +35,47 @@ SELECT * FROM inmueble CROSS JOIN empleado;
 --Sería lo mismo
 SELECT * FROM inmueble,empleado;
 
+/*
+Con el producto cartesiano combinamos cualquier fila de una tabla con todas las de la otra, tengan 
+o no tengan relación.
+Con el operador JOIN podemos seleccionar las filas que cumplan ciertas condiciones del producto cartesiano 
+y descartar el resto.
+Las filas que cumplan la condición definida en la cláusula ON o WHERE formarán el resultado de la consulta.
+*/
+
+--Obtener el código,dirección y código postal de cada inmueble junto con el nombre del empleado que lo gestiona
+
+SELECT inmueble.id,inmueble.direc,inmueble.cp,empleado.nombre FROM inmueble JOIN empleado ON inmueble.empleado_id = empleado.id;
+
+--También se puede obtener (Obtener el código,dirección y código postal de cada inmueble junto con el nombre del empleado que lo gestiona), del siguiente modo
+SELECT inmueble.id,inmueble.direc,inmueble.cp,empleado.nombre FROM inmueble,empleado WHERE empleado.id = inmueble.empleado_id;
+
+/*
+LEFT JOIN: Obtenemos las tuplas resultantes de un INNER JOIN más todas aquellas de la primera tabla descrita en el FROM:tabla_izq que no cumplen 
+con el filtro del JOIN. En estas últimas tuplas los valores de los campos de la tabla_drcha tendrán valor NULL.
+*/
 
 
+-- Obtener el código,dirección y código postal de cada inmueble junto con el empleado que lo gestiona, INCLUYENDO también los inmuebles que no son gestionados por ningún empleado.
+
+SELECT inmueble.id,direc,cp,nombre FROM inmueble LEFT JOIN empleado ON inmueble.empleado_id = empleado.id;
+
+/*
+RIGHT JOIN: Obtenemos las tuplas resultantes de un INNER JOIN mas todas aquellas de la segunda tabla descrita en el FROM:tabla_drcha que no cumplen el filtro del JOIN
+*/
+
+-- Obtener el nombre y email de los empleados junto con el código,dirección y código postal de cada inmueble que gestionan, incluyendo también los empleados que no gestionan ningún inmueble.
+SELECT nombre,email,inmueble.id,direc,cp FROM inmueble RIGHT JOIN empleado ON inmueble.empleado_id = empleado.id;
 
 
+/*
+FULL JOIN: Aplicamos las operaciones LEFT JOIN y RIGHT JOIN a las tablas combinadas
+*/
 
+-- Obtener el código,dirección y código postal de cada inmueble junto con el nombre y email del empleado que lo gestiona, incluyendo tanto los inmuebles que no son gestionados por ningún empleado 
+-- como los empleados que no gestionan ningún inmueble.
+
+SELECT inmueble.id,direc,cp,nombre,email FROM inmueble FULL JOIN empleado ON inmueble.empleado_id = empleado.id; 
 
 
 
