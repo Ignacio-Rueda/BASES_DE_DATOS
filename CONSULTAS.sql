@@ -72,14 +72,33 @@ SELECT nombre,email,inmueble.id,direc,cp FROM inmueble RIGHT JOIN empleado ON in
 FULL JOIN: Aplicamos las operaciones LEFT JOIN y RIGHT JOIN a las tablas combinadas
 */
 
--- Obtener el código,dirección y código postal de cada inmueble junto con el nombre y email del empleado que lo gestiona, incluyendo tanto los inmuebles que no son gestionados por ningún empleado 
--- como los empleados que no gestionan ningún inmueble.
+/* Obtener el código,dirección y código postal de cada inmueble junto con el nombre y email del empleado que lo gestiona, incluyendo tanto los inmuebles que no son gestionados por ningún empleado 
+ 	como los empleados que no gestionan ningún inmueble.
+*/
 
 SELECT inmueble.id,direc,cp,nombre,email FROM inmueble FULL JOIN empleado ON inmueble.empleado_id = empleado.id; 
 
 
+/*
+Obtener la dirección y código postal de los inmuebles y el nombre de los empleados que los gestionan, clasificados ascendentemente por el nombre de empleado y descendentemente por el código postal
+*/
 
 
+SELECT direc,cp,nombre FROM inmueble AS i INNER JOIN empleado AS e ON i.empleado_id = e.id ORDER BY nombre ASC, cp DESC;
+
+/*
+LIMIT: Especifica el número máximo de filas que se obtienen de una consulta. La cláusula OFFSET indica el número de filas que se omitirán antes de aplicar LIMIT.
+*/
+
+-- Obtener los tres dormitorios de menor coste, sin contar los dos más económicos.
+
+SELECT * FROM dormitorio ORDER BY pvp LIMIT 3 OFFSET 2;
+
+/*
+FUNCIONES DE AGREGACIÓN: Solo se pueden usar en estos dos casos:
+	-La lista de selección de una instrucción SELECT (una subconsulta o una consulta principal).
+	-Cláusula HAVING
+*/
 
 
 
