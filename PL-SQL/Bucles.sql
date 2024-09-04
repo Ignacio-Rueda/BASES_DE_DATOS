@@ -17,6 +17,11 @@ dbms_output.put_line('BUCLE FOR');
         dbms_output.put_line(v_i);
         end loop;
 
+dbms_output.put_line('BUCLE FOR REVERSE');
+    for v_i in reverse 1..10
+        loop
+        dbms_output.put_line(v_i);
+        end loop;
 end;
 
 /
